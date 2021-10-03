@@ -1,16 +1,12 @@
-import { UserInterface } from "src/app/core/user.service";
+import { DashboardClass } from "../dashboard.class";
+import { RoomInterface } from "../room-mgt/room-mgt.service";
 
-export class UserMgtClass {
+export class UserMgtClass extends DashboardClass {
 
-    constructor() {}
-
-    getCreator(betCreator: UserInterface, currentUserId: string): string {
-        if (betCreator._id === currentUserId) {
-            return 'You';
-        } else {
-            return betCreator.firstname /* + ' ' + betCreator.lastname */;
-        }
+    constructor() {
+      super()
     }
+  
 
     getExpiredBookings(dDate: Date): boolean {
         //get todays date
@@ -25,15 +21,25 @@ export class UserMgtClass {
     }
 
     getStatus(status: string): string {
-        if (status === 'In') {
-          return 'Checked In'
-        }
-        if (status === 'Out') {
-          return 'Checked Out'
-        }
-        if (status === 'Reserved') {
-          return 'Reservation'
-        }
-        return 'Pending'
+      if (status === 'In') {
+        return 'Checked In'
       }
+      if (status === 'Out') {
+        return 'Checked Out'
+      }
+      if (status === 'Reserved') {
+        return 'Reservation'
+      }
+      return 'Pending'
+    }
+
+    getRoomId(room: string, rooms: RoomInterface[]): string {
+      const fn: RoomInterface[] = []
+      rooms.forEach((r) => {
+        if (r.name === room) {
+          fn.push(r) 
+        }
+      })
+      return fn[0]._id
+    }
 }

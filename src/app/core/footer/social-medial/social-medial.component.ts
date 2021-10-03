@@ -8,7 +8,7 @@ interface LanguagesInterface {
 @Component({
   selector: 'hdi-social-medial',
   template: `
-    <section fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center center">
+    <section fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between center">
       <div class="brand" fxFlex="20" fxFlex.sm="100" fxFlex.xs="100">
         <logo></logo>
         <p>
@@ -25,44 +25,36 @@ interface LanguagesInterface {
         
       </div>
       <div class="links" fxFlex="80" fxFlex.sm="100" fxFlex.xs="100">
-        <aside fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="3em" fxLayoutAlign.sm="start center" fxLayoutGap.sm="1em">
+        <aside 
+          fxLayout="row" 
+          fxLayoutAlign="end center" 
+          fxLayoutGap="3em" 
+          fxHide fxShow.gt-sm
+          >
           <div>
             <h2>About</h2>
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">News</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">About</a></li>
             </ul>
           </div>
 
           <div>
             <h2>Services</h2>
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">News</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="#">Accomodations</a></li>
+              <li><a href="#">Karaoke Bar</a></li>
+              <li><a href="#">Night Clubs</a></li>
             </ul>
           </div>
-
-          <!-- <div>
-            <h2>Resources</h2>
-            <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">News</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#about">About</a></li>
-            </ul>
-          </div> -->
 
           <div>
             <h2>Social</h2>
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">News</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Linkedin</a></li>
             </ul>
           </div>
         </aside>

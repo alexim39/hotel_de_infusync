@@ -84,6 +84,7 @@
                   </div>
                   <div class="value">
                   {{foundClientProfile.payment | titlecase }}
+                  <small>{{getAmount(foundClientProfile.payment, foundClientProfile.room) | currency:'NIG':'&#8358;'}}</small>
                   </div>
                 </section>
 
@@ -128,7 +129,7 @@
                     BOOKED ROOM:
                   </div>
                   <div class="value">
-                  {{foundClientProfile.room | titlecase }}
+                  {{foundClientProfile.room.name | titlecase }}
                   </div>
                 </section>
 

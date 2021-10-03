@@ -1,0 +1,74 @@
+section {
+    .filter {
+      background-color: white;
+      height: 100%;
+      padding: 1rem;
+      margin-bottom: -2.5em;
+      mat-form-field {
+        width: 30%;
+      }
+    }
+    table {
+      width: 100%;
+      margin-top: 2rem;
+      img {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        margin-bottom: -0.6em;
+        border: 1px solid #ccc;
+      }
+      td {
+        small {
+          display: block;
+          font-size: 0.6em;
+        }
+        .clickable {
+          cursor: pointer;
+        }
+        .profile-img {
+          margin-top: 6px;
+        }
+        .profile-name{
+          padding-top: 0.6em;
+          font-size: 0.8em;
+          color: gray;
+        }
+        button {
+          margin-right: 5px;
+        }
+      }
+    }  
+    .booked {
+      text-decoration: line-through;
+    }  
+    .no-user-found {
+      text-align: center;
+      p {
+        color: orange;
+        margin: 2em;
+        font-weight: bold;
+      }
+    }   
+  }
+
+  /* for tablet */
+  @media only screen and (max-width:800px) {
+    section {
+      .filter {
+        mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+  /* for mobile */
+  @media only screen and (max-width:500px) {
+    section {
+      .filter {
+        mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }

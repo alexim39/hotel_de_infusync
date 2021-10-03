@@ -1,0 +1,95 @@
+<div class="breadcrumb-wrap">
+    <ul class="breadcrumb">
+      <li>
+        <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+      </li>
+      <li>User management</li>
+      <!-- <li>user list</li> -->
+    </ul>
+  </div>
+
+  <section class="add-pannel" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="center center"  fxLayoutGap="1em">
+    <a mat-flat-button color="accent" fxFlex.xs [routerLink]="['/dashboard/users/new']">
+      <mat-icon>add</mat-icon>
+      ADD NEW CLIENT
+    </a>
+  </section>
+
+  <aside>
+    <div *ngIf="userMgtService.showSpinner | async" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <span>Loading...</span>
+    </div>
+
+    <section *ngIf="!(userMgtService.showSpinner | async)">
+
+      <section *ngIf="isEmptyResponse">
+          <div class="filter mat-elevation-z8">
+            <mat-form-field>
+              <mat-label>Search Table</mat-label>
+              <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+          </div>
+          <table mat-table [dataSource]="clients" matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> CLIENT </th>
+              <td matTooltip="View {{client.names}}'s profile" mat-cell *matCellDef="let client" (click)="loadClientProfile(client._id)" fxLayout="column" fxLayoutAlign="start start"> 
+                <img class="profile-img clickable" [src]="profileImg"/>
+                <div class="profile-name clickable"> {{client.names | titlecase}}</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="arrivalDate">
+              <th mat-header-cell *matHeaderCellDef> ARRIVAL </th>
+              <td mat-cell *matCellDef="let client"> {{client.arrivalDate | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="departureDate">
+              <th mat-header-cell *matHeaderCellDef> DEPARTURE </th>
+              <td mat-cell *matCellDef="let client"> {{client.departureDate | date}}  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </th>
+              <td mat-cell *matCellDef="let client"> 
+                {{getStatus(client.status) | titlecase}}
+                <small><!-- {{getStatus(client)}} --> </small>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="createDDate">
+              <th fxHide fxShow.gt-sm mat-header-cell *matHeaderCellDef> POST DATE </th>
+              <td fxHide fxShow.gt-sm mat-cell *matCellDef="let client"> {{getCreatedDate(client.createdDate)}}<!-- {{bet.createDate | date}} --> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="creator">
+              <th mat-header-cell *matHeaderCellDef> ADMIN </th>
+              <td matTooltip="View profile" mat-cell *matCellDef="let client"> 
+                {{getAdmin(client.creator) | titlecase}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> ACTION </th>
+              <td mat-cell *matCellDef="let client"> 
+                <button mat-stroked-button matTooltip="Edit profile" (click)="openUpdateDialog(client)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-stroked-button matTooltip="View {{client.names}}'s profile" (click)="loadClientProfile(client._id)">
+                  <mat-icon>pageview</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row [ngClass]="{ 'checked-out': cilentCheckedOut(client.status),  'expired': getExpiredBookings(client.departureDate) }" *matRowDef="let client; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[10, 20, 45, 60, 100]"></mat-paginator>
+      </section>
+      <section class="no-user-found" *ngIf="!isEmptyResponse">
+        <p>No user found</p>
+      </section>
+
+    </section>
+  </aside>

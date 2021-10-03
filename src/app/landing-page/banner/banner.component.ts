@@ -90,7 +90,7 @@ import { AuthComponent } from 'src/app/auth/auth.component';
             </h3> -->
 
             <div class="btn">
-              <a (click)="openAuthComponent()">BOOK RESERVATION NOW</a>
+              <a>BOOK RESERVATION NOW</a>
             </div>
           </article>
 

@@ -22,10 +22,10 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
         <mat-icon class="prediction-open">keyboard_arrow_down</mat-icon>
       </a>
       <mat-nav-list class="predictionDropdown">
-        <a mat-list-item (click)="toggle()"  [routerLink]="['/dashboard/system-prediction']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> 
+        <a mat-list-item (click)="toggle()"  [routerLink]="['/dashboard/new-room']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> 
           <span mat-line>New room</span>
         </a>
-        <a mat-list-item (click)="toggle()"  [routerLink]="['/dashboard/betcodes']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> 
+        <a mat-list-item (click)="toggle()"  [routerLink]="['/dashboard/view-room']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> 
           <span mat-line>View rooms</span>
         </a>
       </mat-nav-list>

@@ -12,6 +12,7 @@ import { LogoModule } from '../logo/logo.module';
 import { CoreModule } from '../core/core.module';
 import { AccountActivationComponent } from './dashboard/home/account-activation/account-activation.component';
 import { UserMgtModule } from './dashboard/user-mgt/user-mgt.module';
+import { RoomMgtModule } from './dashboard/room-mgt/room-mgt.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { UserMgtModule } from './dashboard/user-mgt/user-mgt.module';
     RouterModule,
     LogoModule,
     CoreModule,
-    UserMgtModule
+    UserMgtModule,
+    RoomMgtModule
   ]
 })
 export class AdminModule { }

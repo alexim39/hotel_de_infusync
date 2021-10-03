@@ -16,10 +16,9 @@ import { UserInterface, UserService } from 'src/app/core/user.service';
 
     <section *ngIf="currentUser" class="main" fxLayout="column" fxLayoutGap="3rem">
       <infusync-account-activation></infusync-account-activation>
-      <!-- <async-box-menu></async-box-menu> -->
 
-      <div class="fab" matTooltip="Predict games">
-        <a mat-fab matRipple color="accent" [routerLink]="['/dashboard/betcodes']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <div class="fab" matTooltip="New booking">
+        <a mat-fab matRipple color="accent" [routerLink]="['/dashboard/users/new']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <mat-icon>batch_prediction</mat-icon>
         </a>
       </div>

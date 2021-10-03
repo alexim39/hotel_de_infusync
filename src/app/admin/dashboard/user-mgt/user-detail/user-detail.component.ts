@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventTriggerService } from 'src/app/common/event-trigger.service';
 import { UserInterface, UserService } from 'src/app/core/user.service';
+import { RoomInterface } from '../../room-mgt/room-mgt.service';
 import { UserMgtClass } from '../user-mgt.class';
 import { ClientsInterface, UserMgtService } from '../user-mgt.service';
 
@@ -69,6 +70,13 @@ export class UserDetailComponent extends UserMgtClass implements OnInit, OnDestr
         )
       })
     )
+  }
+
+  getAmount(paymentStatus: string, room: RoomInterface): number { 
+    if (paymentStatus == 'Payment complete') {
+      return room.price;
+    } 
+    return 0
   }
 
   ngOnDestroy() {

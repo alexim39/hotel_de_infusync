@@ -57,6 +57,11 @@ section {
         section {
           padding: 1em 0;
           border-bottom: 1px solid #ccc;
+          small {
+            display: block;
+            font-weight: bold;
+            text-align: right;
+          }
         }
       }
     }

@@ -87,11 +87,9 @@
       <mat-form-field>
         <mat-label>Accomodation (Room)</mat-label>
         <mat-select formControlName="room" (selectionChange)="onChange($event.value)">
-          <mat-option value="Zweibett">Zweibett</mat-option>
-          <mat-option value="Doppelbett">Doppelbett</mat-option>
-          <mat-option value="Premiumbett">Premiumbett</mat-option>
-          <mat-option value="Luxurybett">Luxurybett</mat-option>
-          <mat-option value="standardbett">standardbett</mat-option>
+          <mat-option *ngFor="let room of freeRooms" [value]="room.name">
+            {{room.name | titlecase}}
+          </mat-option>
         </mat-select>
         <mat-hint>{{selectedAccodationPrice | currency:'NIG':'&#8358;'}}</mat-hint>
       </mat-form-field>

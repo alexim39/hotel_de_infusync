@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { FormResetterService } from 'src/app/core/form-resetter.service';
 import { UserInterface, UserService } from 'src/app/core/user.service';
+import { RoomInterface, RoomMgtService } from '../../room-mgt/room-mgt.service';
+import { UserMgtClass } from '../user-mgt.class';
 import { ClientsInterface, UserMgtService } from '../user-mgt.service';
 
 @Component({
@@ -26,22 +28,39 @@ import { ClientsInterface, UserMgtService } from '../user-mgt.service';
   `],
   templateUrl: './add-new-user.component.html'
 })
-export class AddNewUserComponent implements OnInit, OnDestroy {
+export class AddNewUserComponent extends UserMgtClass implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
   user: UserInterface;
   form: FormGroup;
   isSpinning: boolean = false;
   selectedAccodationPrice: number = 0;
+  freeRooms: Array<RoomInterface> = [];
 
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
     private userMgtService: UserMgtService,
-    private formResetterService: FormResetterService
-  ) { }
+    private formResetterService: FormResetterService,
+    private roomMgtService: RoomMgtService
+  ) {
+    super()
+  }
+
+  private getAllFreeRooms() {
+    this.subscriptions.push(
+      this.roomMgtService.getAllFreeRooms().subscribe((res) => {
+        if (res.code === 200) {
+          this.freeRooms = res.obj;
+        }
+      })
+    )
+  }
 
   ngOnInit(): void {
+
+    // get all available rooms
+    this.getAllFreeRooms();
 
     // push into list
     this.subscriptions.push(
@@ -63,95 +82,73 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
+            Validators.email,
           ], updateOn: 'change'
       }),
       phone: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
+            Validators.pattern('[0-9]{1,11}'),
           ], updateOn: 'change'
       }),
       address: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       country: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       arrivalDate: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       departureDate: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       people: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       room: new FormControl('', {
         validators:
           [
             Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       services: new FormControl('', {
         validators:
           [
-            //Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
       comment: new FormControl('', {
         validators:
           [
-            Validators.required,
-            //Validators.pattern('[A-Za-z]{2,80}'),
           ], updateOn: 'change'
       }),
     })
   }
 
-  onChange(accomodation: string) {
-    switch (accomodation) {
-      case 'Zweibett':
-        this.selectedAccodationPrice = 25000;
-        break;
-      case 'Doppelbett':
-        this.selectedAccodationPrice = 50000;
-        break;
-      case 'Premiumbett':
-        this.selectedAccodationPrice = 95000;
-        break;
-      case 'Luxurybett':
-        this.selectedAccodationPrice = 120000;
-        break;
-      case 'standardbett':
-        this.selectedAccodationPrice = 350000;
-        break;
-      case null:
-        this.selectedAccodationPrice = 0;
-    }
+  onChange(room: string) {
+    const fn: RoomInterface[] = []
+      this.freeRooms.forEach((r) => {
+        if (r.name === room) {
+          fn.push(r) 
+        }
+      })
+      this.selectedAccodationPrice = fn[0].price
   }
 
   onSubmit(clientObj: ClientsInterface) {
@@ -159,6 +156,7 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
 
     // attach the user id
     clientObj['creator'] = this.user._id;
+    clientObj['room'] = super.getRoomId(clientObj.room, this.freeRooms);
 
     // push into list
     this.subscriptions.push(
