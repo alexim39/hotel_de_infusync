@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from './../common/material/material.module';
+import { MaterialModule } from 'src/app/common/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page.component';

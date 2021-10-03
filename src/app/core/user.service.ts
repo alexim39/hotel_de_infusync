@@ -13,14 +13,9 @@ export interface UserInterface {
     email: string;
     isActive: boolean;
 
-    // other members
+    // other members: optional
     about?: string;
     phone?: string;
-    username: string;
-    followers?: UserInterface[];
-    ratedowns?: UserInterface[];
-    rateups?: UserInterface[];
-    referer?: string;
 }
 
 const httpOptions = {
@@ -46,7 +41,6 @@ export class UserService {
             //catchError(this.handleError)
             map((res: ServerResponse) => {
                 if (res.code === 200) {
-                    //console.log(res.obj)
                     return res.obj
                 }
             })

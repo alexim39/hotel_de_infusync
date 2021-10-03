@@ -1,0 +1,115 @@
+<div class="breadcrumb-wrap">
+    <ul class="breadcrumb">
+      <li>
+        <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+      </li>
+      <li>
+        <a [routerLink]="['/dashboard/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">User list</a>
+      </li>
+      <li>add new client</li>
+    </ul>
+</div>
+
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <mat-card-title>CLIENT BOOKING FORM</mat-card-title>
+
+    <mat-card-content>
+
+      <mat-form-field >
+        <mat-label>Full name</mat-label>
+        <input matInput formControlName="names">
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Email address</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Phone number</mat-label>
+        <input matInput maxlength="11" formControlName="phone">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <textarea matInput #address maxlength="90" formControlName="address"></textarea>
+        <mat-hint align="end">{{address.value.length}} / 90</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Country</mat-label>
+        <input matInput list="country" formControlName="country">
+        <datalist id="country">
+          <option value="Nigeria">
+          <option value="Ghana">
+          <option value="South Africa">
+          <option value="USA">
+        </datalist>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Arrival date</mat-label>
+        <input matInput [matDatepicker]="arrivalDatePicker" formControlName="arrivalDate">
+        <mat-datepicker-toggle matSuffix [for]="arrivalDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #arrivalDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Departure date</mat-label>
+        <input matInput [matDatepicker]="departureDatePicker" formControlName="departureDate">
+        <mat-datepicker-toggle matSuffix [for]="departureDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #departureDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Number of visitors</mat-label>
+        <mat-select formControlName="people">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="1">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+        </mat-select>
+      </mat-form-field> 
+
+      <mat-form-field>
+        <mat-label>Room Services (Optional)</mat-label>
+        <mat-select formControlName="services">
+          <mat-option value=""></mat-option>
+          <mat-option value="Laundry">Laundry</mat-option>
+          <mat-option value="Special delicacy">Special delicacy</mat-option>
+          <mat-option value="Fitness and health">Fitness and health</mat-option>
+          <mat-option value="Companion">Companion</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Accomodation (Room)</mat-label>
+        <mat-select formControlName="room" (selectionChange)="onChange($event.value)">
+          <mat-option value="Zweibett">Zweibett</mat-option>
+          <mat-option value="Doppelbett">Doppelbett</mat-option>
+          <mat-option value="Premiumbett">Premiumbett</mat-option>
+          <mat-option value="Luxurybett">Luxurybett</mat-option>
+          <mat-option value="standardbett">standardbett</mat-option>
+        </mat-select>
+        <mat-hint>{{selectedAccodationPrice | currency:'NIG':'&#8358;'}}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Comment</mat-label>
+        <textarea matInput #comment maxlength="156" formControlName="comment"></textarea>
+        <mat-hint align="end">{{comment.value.length}} / 156</mat-hint>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button [disabled]="form.invalid || isSpinning" mat-flat-button color="accent">
+            <div class="loader" *ngIf="isSpinning"></div>
+            SUBMIT
+        </button>
+        <!-- <button mat-button>CLOSE</button> -->
+    </mat-card-actions>
+    </form>
+</mat-card>

@@ -14,9 +14,8 @@ import { MatExpansionModule } from '@angular/material/expansion'; import { MatSl
 import { MatTooltipModule } from '@angular/material/tooltip'; import { MatRippleModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs'; import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar'; import { MatBadgeModule } from '@angular/material/badge';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from "@angular/material/form-field";
-
+import { MatSelectModule } from '@angular/material/select'; import { MatFormFieldModule } from "@angular/material/form-field";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 const m = [
   MatSliderModule, MatProgressBarModule,
@@ -35,7 +34,7 @@ const m = [
   MatTooltipModule, MatRippleModule,
   MatTabsModule, MatStepperModule,
   MatBadgeModule, MatSelectModule,
-  MatFormFieldModule
+  MatFormFieldModule, MatButtonToggleModule
 ]
 @NgModule({ imports: [m], exports: [m] })
 export class MaterialModule { }

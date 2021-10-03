@@ -46,7 +46,7 @@ interface LanguagesInterface {
             </ul>
           </div>
 
-          <div>
+          <!-- <div>
             <h2>Resources</h2>
             <ul>
               <li><a href="#home">Home</a></li>
@@ -54,7 +54,7 @@ interface LanguagesInterface {
               <li><a href="#contact">Contact</a></li>
               <li><a href="#about">About</a></li>
             </ul>
-          </div>
+          </div> -->
 
           <div>
             <h2>Social</h2>

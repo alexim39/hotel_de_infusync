@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
     constructor() {   }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.headers.get("skip")) { // skip if API endpoint
+        if (req.headers.get("skip")) { // interceptor to skip API if 'skip' is found
             const newHeaders = req.headers.delete('skip')
             const newRequest = req.clone({ headers: newHeaders });
             return next.handle(newRequest);

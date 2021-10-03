@@ -1,0 +1,71 @@
+section {
+    .not-activated-account {
+      text-align: center;
+      font-weight: bold;
+      color: orange;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  .profile-area {
+    background: whitesmoke;
+    padding: 2em;
+    img {
+      width: 5em;
+      height: 5em;
+      border-radius: 50%;
+    }
+    h1 {
+      small {
+        font-size: 0.5em;
+        color: gray;
+      }
+    }
+    p {
+      color: gray;
+      text-align: left;
+      font-size: 0.8em;
+    }
+    .line {
+      margin: 3em 0;
+      width: 100%;
+      hr {
+        color: #eee;
+      }
+    }
+    section {
+      width: 100%;
+      height: 5em;
+      margin-top: -1em;
+      font-size: 0.9em;
+      border-bottom: 1px solid #ccc;
+      .social {
+        float: left;
+      }
+      .value {
+        color: gray;
+        text-align: right;
+        float: right;
+      }
+    }
+  } 
+  .booking-display {
+    mat-card {
+      padding: 2em;
+      mat-card-content  {
+        section {
+          padding: 1em 0;
+          border-bottom: 1px solid #ccc;
+        }
+      }
+    }
+  }
+.no-user-found {
+    text-align: center;
+    p {
+        color: orange;
+        margin: 2em;
+        font-weight: bold;
+    }
+}

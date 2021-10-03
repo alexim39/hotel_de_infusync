@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   { path: '',  loadChildren: () => import('./landing-page/landing-page.module').then(m => m.LandingPageModule) },
-  //{ path: 'dashboard',  loadChildren: () => import('./client/client.module').then(m => m.ClientModule) }
+  { path: 'dashboard',  loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
 ];
 
 @NgModule({

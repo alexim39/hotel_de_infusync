@@ -1,0 +1,167 @@
+<div class="breadcrumb-wrap">
+    <ul class="breadcrumb">
+      <li>
+        <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+      </li>
+      <li>
+        <a [routerLink]="['/dashboard/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">User list</a>
+      </li>
+      <li>user profile</li>
+    </ul>
+  </div>
+
+  <div *ngIf="userMgtService.showSpinner | async" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <span>Loading...</span>
+    </div>
+  <div *ngIf="!(userMgtService.showSpinner | async)"> 
+
+    <section *ngIf="isEmptyResponse">
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="1em">
+
+          <section class="profile-area" fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+            <img class="profile-img clickable" [src]="profileImg"/>
+            <h1>{{foundClientProfile.names | titlecase }}</h1>
+            <p>
+              {{foundClientProfile.address | lowercase}}
+            </p>
+            <div class="btn" fxLayout="row" fxLayoutGap="1em">
+              <button mat-flat-button color="accent" *ngIf="foundClientProfile.status == 'Out' && foundClientProfile.payment == 'Payment complete'">PREMIUM CUSTOMER</button>
+              <button mat-flat-button color="primary" *ngIf="foundClientProfile.status == 'In' && foundClientProfile.payment == 'Payment complete'">REGULAR CUSTOMER</button>
+              <button mat-flat-button color="warn" *ngIf="foundClientProfile.status == 'Pending' && foundClientProfile.payment !== 'Payment complete'">REGULAR CUSTOMER</button>
+            </div>
+
+            <div class="line"><hr></div>
+
+            
+            <section fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="social">
+                EMAIL:
+              </div>
+              <div class="value">
+              {{foundClientProfile.email | lowercase}}
+              </div>
+            </section>
+            <section fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="social">
+                PHONE NUMBER:
+              </div>
+              <div class="value">
+              {{foundClientProfile.phone | lowercase}}
+              </div>
+            </section>
+            <section fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="social">
+                COUNTRY:
+              </div>
+              <div class="value">
+              {{foundClientProfile.country | sentencecase}}
+              </div>
+            </section>
+
+          </section>
+
+          <section class="booking-display" fxFlex="70" fxLayout="column" fxLayoutGap="1em">
+            
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>BOOKING DETAILS</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    BOOKING STATUS:
+                  </div>
+                  <div class="value">
+                  {{getStatus(foundClientProfile.status) | titlecase}}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    PAYMENT STATUS:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.payment | titlecase }}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    ARRIVAL DATE:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.arrivalDate | date}}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    DEPARTURE DATE:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.departureDate | date}}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    SERVICE REQUEST:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.services | titlecase}}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                      NUMBER OF VISITORS:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.people }}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    BOOKED ROOM:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.room | titlecase }}
+                  </div>
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    SERVICE PERSONS:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.creator.firstname | titlecase }} {{foundClientProfile.creator.lastname | titlecase }}
+                  </div> 
+                </section>
+
+                <section fxLayout="row" fxLayoutAlign="space-between center">
+                  <div class="social">
+                    BOOK DATE:
+                  </div>
+                  <div class="value">
+                  {{foundClientProfile.createdDate | date }}
+                  </div> 
+                </section>
+
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <!-- <button mat-button>LIKE</button> -->
+                <a mat-flat-button [routerLink]="['/dashboard/users']">CLOSE</a>
+              </mat-card-actions>
+            </mat-card>
+
+          </section>
+        </div>
+      </section>
+      <section class="no-user-found" *ngIf="!isEmptyResponse">
+        <p>No record found</p>
+      </section>
+
+  </div>
