@@ -14,13 +14,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "esnext",
     "module": "es2020",
 
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
     "lib": [
-      "es2018",
+      "esnext",
       "dom"
     ]
   },
